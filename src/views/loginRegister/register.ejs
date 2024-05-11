@@ -6,18 +6,22 @@
 </head>
 <body>
     <%- include("./partials/nav") %>
-    <h1>hola</h1>
-    
-    <form action="/register"  method="POST" style=" display: flex; flex-direction: column; align-items: center;">
-        <input type="text" placeholder="nombre" name="nombre" required>
-        <input type="text" placeholder="apellido" name="apellido" required>
-        <input type="text" placeholder="dni" name="dni" required>
-        <input type="text" placeholder="mail" name="mail" required>
-        <input type="text" placeholder="password" name="password" required>
-        <input type="text" placeholder="telefono" name="telefono" required>
-        <input type="date" placeholder="fecha" name="fecha" required>
+    <main class="container">
+        <h1>Por favor ingrese los datos para crear una cuenta</h1>
 
-        <button type="submit">agregar</button>
-    </form>
+        <form action="/register"  method="POST" class="container" style=" display: flex; flex-direction: column; align-items: center;">
+            
+            <input type="text" placeholder="nombre" name="nombre" required>
+            <input type="text" placeholder="apellido" name="apellido" required>
+            <input type="text" placeholder="dni" name="dni" required>
+            <input type="text" placeholder="mail" name="mail" required>
+            <input type="text" placeholder="password" name="password" required>
+            <input type="text" placeholder="telefono" name="telefono" required>
+            <input type="date" placeholder="fecha" name="fecha" required>
+    
+            <button type="submit">agregar</button>
+        </form>
+    </main>
+    
 </body>
 </html>
