@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <%- include("./partials/head") %>
-    <title>Crear Cuenta></title>
+    <title>Crear Cuenta</title>
 </head>
 <body>
     <%- include("./partials/nav") %>
     <h1>hola</h1>
-    <form action="/"  method="POST">
+    
+    <form action="/register"  method="POST" style=" display: flex; flex-direction: column; align-items: center;">
         <input type="text" placeholder="nombre" name="nombre" required>
-        <input type="text" placeholder="precio" name="precio" required>
-        <input type="text" placeholder="plataformas" name="plataformas" required>
+        <input type="text" placeholder="apellido" name="apellido" required>
+        <input type="text" placeholder="dni" name="dni" required>
+        <input type="text" placeholder="mail" name="mail" required>
+        <input type="text" placeholder="password" name="password" required>
+        <input type="text" placeholder="telefono" name="telefono" required>
+        <input type="date" placeholder="fecha" name="fecha" required>
 
         <button type="submit">agregar</button>
     </form>
