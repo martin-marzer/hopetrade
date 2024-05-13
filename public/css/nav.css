@@ -3,7 +3,7 @@ nav {
     width: 100%;
     justify-content: center;
     background-color: #e8e8e7;
-    font-family: "Montserrat", Sans-serif;
+    font-family: Sans-serif;
 }
 
 .nav-container {
@@ -42,4 +42,8 @@ nav {
     padding: 5px 15px;
     border-radius: 2px;
     background-color: #79b18d;
+}
+
+.container-links a:last-child:hover{
+    background-color: #5c876b;
 }

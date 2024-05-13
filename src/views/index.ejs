@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <%- include("./partials/head") %>
+    <link rel="stylesheet" href="/css/home.css">
     <title>HopeTrade</title>
 </head>
-<body>
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
     <%- include("./partials/nav") %>
-    <h1>hola rey</h1>
 
+    <main>
+        <h1>hola rey</h1>
         <p><%= locals.nombre || "no hay nadie" %></p>
-    <div style="height: 300px;"></div>
+    </main>
+    
     <%- include("./partials/footer") %>
 </body>
 </html>

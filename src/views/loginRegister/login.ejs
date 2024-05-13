@@ -2,24 +2,39 @@
 <html lang="en">
 <head>
     <%- include("./partials/head") %>
+    <link rel="stylesheet" href="/css/register-login.css">
     <title>Iniciar Sesion</title>
 </head>
 <body>
     <%- include("./partials/nav") %>
     <main>
-        <h1>hola</h1>
-        <div>
+        <div class="container-form">
+            <h1>¡Bienvenido de nuevo!</h1>
             <form action="/login"  method="POST">
-                <input type="text" placeholder="nombre" name="nombre" required>
-                <input type="text" placeholder="precio" name="precio" required>
-                <input type="text" placeholder="plataformas" name="plataformas" required>
+
+                <!-- <div class="campo">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" placeholder="45988352" required>
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="*******" required>
+                </div> -->
+
+                
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" placeholder="martin" id="nombre" name="nombre" required>
+                </div>
         
-                <button type="submit">agregar</button>
+                <button class="btn enviar" type="submit">agregar</button>
                 <% if (locals.info !== undefined)  { %>
-                   <p> <%= info %>
+                    <p> <%= info %>
                 <% } %>
             </form>
         </div>
+
     </main>
 </body>
 </html>

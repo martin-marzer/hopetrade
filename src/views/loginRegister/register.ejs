@@ -2,25 +2,63 @@
 <html lang="en">
 <head>
     <%- include("./partials/head") %>
+    <link rel="stylesheet" href="/css/register-login.css">
     <title>Crear Cuenta</title>
 </head>
 <body>
     <%- include("./partials/nav") %>
-    <main class="container">
-        <h1>Por favor ingrese los datos para crear una cuenta</h1>
+    <main>
+        <div class="container-form">
+            <h1>Por favor ingrese los datos para crear una cuenta</h1>
+            <form action="/register"  method="POST">
+                
+                <div class="container-campo">
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Martin" required>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" placeholder="Di Salvo" required>
+                    </div>
+                </div>
 
-        <form action="/register"  method="POST" class="container" style=" display: flex; flex-direction: column; align-items: center;">
-            
-            <input type="text" placeholder="nombre" name="nombre" required>
-            <input type="text" placeholder="apellido" name="apellido" required>
-            <input type="text" placeholder="dni" name="dni" required>
-            <input type="text" placeholder="mail" name="mail" required>
-            <input type="text" placeholder="password" name="password" required>
-            <input type="text" placeholder="telefono" name="telefono" required>
-            <input type="date" placeholder="fecha" name="fecha" required>
     
-            <button type="submit">agregar</button>
-        </form>
+                <div class="campo">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" placeholder="45988352" required>
+                </div>
+                
+                <div class="campo">
+                    <label for="mail">Correo</label>
+                    <input type="text" id="mail" name="mail" placeholder="ejemplo@gmail.com" required>
+                </div>
+                
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="*******" required>
+                </div>
+                
+                <div class="container-campo">
+
+                    <div class="campo">
+                        <label for="telefono">Telefono</label>
+                        <input type="text" id="telefono"  name="telefono" placeholder="2241438774" required>
+                    </div>
+        
+                    <div class="campo">
+                        <label for="fecha">Nacimiento</label>
+                        <input type="date" id="fecha" name="fecha" placeholder="11/02/2002" required>
+                    </div>
+
+                </div>
+
+                <button class="btn enviar" type="submit">Aceptar</button>
+            </form>
+        </div>
+
+
     </main>
     
 </body>
