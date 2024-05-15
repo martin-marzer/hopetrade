@@ -36,8 +36,12 @@
                         <% } %>
                     </div>
     
+
+                    <div style="display: flex; align-items: center; justify-content: center">
+                        <p>¿Sos nuevo? Crea una cuenta <a href="/register" style="color: black;">Aquí</a></p> 
+                    </div>
                      <div class="btn-container">
-                        <button class="btn cancelar" type="reset">Cancelar</button>
+                        <button class="btn cancelar" onclick="borrar()" type="button" id="reiniciar" >Cancelar</button>
                         <button class="btn enviar" type="submit">Aceptar</button>
                      </div>
                 </form>
@@ -47,4 +51,10 @@
 
     </main>
 </body>
+<script>
+    function borrar() {
+        document.getElementById("dni_mail").value = "";
+        document.getElementById("password").value = "";
+    }
+</script>
 </html>

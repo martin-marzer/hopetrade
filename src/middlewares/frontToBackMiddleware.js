@@ -1,6 +1,6 @@
 function frontToBackMiddleware (req, res, next) {
-    if (req.session.name != undefined) {
-       res.locals.nombre = req.session.name;
+    if (req.session.usuario != undefined) {
+       res.locals.usuario = req.session.usuario;
     }
     next()
 }

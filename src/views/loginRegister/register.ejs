@@ -85,9 +85,12 @@
     
                     </div>
     
+                    <div style="display: flex; align-items: center; justify-content: center">
+                        <p>¿Ya sos miembro? <a href="/register" style="color: black;">Inicia Sesion</a></p> 
+                    </div>
     
                     <div class="btn-container">
-                        <button class="btn cancelar" type="reset">Cancelar</button>
+                        <button class="btn cancelar" onclick="borrar()" type="button">Cancelar</button>
                         <button class="btn enviar" type="submit">Aceptar</button>
                     </div>
                 </form>
@@ -95,4 +98,15 @@
         </div>
     </main>
 </body>
+<script>
+    function borrar() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("dni").value = "";
+        document.getElementById("mail").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("telefono").value = "";
+        document.getElementById("fecha").value = "";
+    }
+</script>
 </html>

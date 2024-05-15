@@ -42,7 +42,7 @@ const controlador = {
     loginProcess: async (req, res) => {
         const result = validationResult(req);
         const {dni_mail, password} = req.body;
-        let usuario;
+        let usuario,rol;
 
         if(result.errors.length > 0){
             return res.render("loginRegister/login", {
@@ -54,8 +54,10 @@ const controlador = {
 
         if(!dni_mail.includes("@") ){
             usuario = await Usuario.findOne({ where: { dni: dni_mail } });
+            rol = "normal"
         } else {
             usuario = await Representante.findOne({ where: { mail: dni_mail } });
+            rol = "representante"
             // if (!usuario)  usuario = await Voluntario.findOne({ where: { mail: dni_mail } });
         }
 
@@ -65,9 +67,8 @@ const controlador = {
                 oldData: req.body
             });
         }
-
-
-        req.session.name = usuario.nombre;
+        usuario = {...usuario.dataValues, rol: rol}
+        req.session.usuario = usuario;
         res.redirect("/")
 
      },
