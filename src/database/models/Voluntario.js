@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../index');
 
-
-let alias = 'Usuario'; // esto debería estar en singular
+let alias = 'Voluntario'; 
 
 let cols = {
     id: {
@@ -11,33 +10,21 @@ let cols = {
         allowNull: false,
         autoIncrement: true
     },
-    dni: {
-        type: DataTypes.STRING(10),
-        allowNull: false,
-        unique: true
-    },
     nombre: {
         type: DataTypes.STRING(50),
         allowNull: false
     },
     apellido: {
         type: DataTypes.STRING(50),
-        allowNull: false,
+        allowNull: false
     },
     mail: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.TEXT,
-        allowNull: false
-    },
-    telefono: {
-        type: DataTypes.STRING(15),
-        allowNull: false
-    },
-    fecha_nacimiento: {
-        type: DataTypes.DATE,
         allowNull: false
     }
 };
@@ -46,9 +33,9 @@ let config = {
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: "updated_at",
-    tableName: "usuario"
+    tableName: "voluntario"
 }
 
-const Usuario = sequelize.define(alias, cols, config);
+const Voluntario = sequelize.define(alias, cols, config);
 
-module.exports = Usuario;
+module.exports = Voluntario;

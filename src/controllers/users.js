@@ -1,56 +1,75 @@
-const path = require('path');
-const fs = require('fs');
+const { validationResult, matchedData } = require("express-validator")
 
-const User = require('../database/models/Usuario')
-const CommonUser = require('../database/models/UsuarioComun')
+const Usuario = require('../database/models/Usuario')
+const Representante = require("../database/models/Representante");
 
 const controlador = {
     register: (req, res) => {
         res.render("loginRegister/register");
     },
     registerProcess: async (req, res) => {
-        const {nombre, apellido, mail, password, telefono, fecha} = req.body
-        try {
-            const usuario = await User.create({
-                nombre: nombre, 
-                apellido: apellido, 
-                mail: mail, 
-                password: password,
-                rol: "usuario"
+        //antes de ejecutarse esta funcion se verifican los campos (vease en las rutas).
+        const result = validationResult(req);
+        //req.body, el cuerpo de la solicitud viene del formulario, los inputs se vinculan mediante el atributo "name"
+        const {nombre, apellido, dni, mail, password, telefono, fecha} = req.body;
+
+        if (result.errors.length > 0) {
+            return res.render("loginRegister/register", {
+                errors: result.mapped(),
+                msgError: "Hubo un problema al registrarse. intentelo de nuevo",
+                oldData: req.body
             });
-    
-            console.log(`creaste el usuario llamado ${usuario.nombre} con el rol ${usuario.rol}`);
-    
-            const usuarioComun = await CommonUser.create({
-                usuario_id: usuario.id, 
+        }
+        try {
+            const usuario = await Usuario.create({
+                nombre: nombre, 
+                apellido: apellido,
+                dni: dni,
+                mail: mail,
+                password: password,
                 telefono: telefono,
                 fecha_nacimiento: fecha
             });
-    
-            console.log(`ademas el usuario tiene estos datos: ${usuarioComun.dataValues}`);
-    
             res.redirect("/login")
         } catch (error) {
             console.log(error)
         }
-
         
     },
     login: (req, res) => {
         res.render("loginRegister/login");
     },
-    loginProcess: (req, res) => {
-        // Prepare output in JSON format
-        console.log(req.body)
-        //aca es donde se crea la sesion que me CAMBIA TODO
-        req.session.name = req.body.nombre;
+    loginProcess: async (req, res) => {
+        const result = validationResult(req);
+        const {dni_mail, password} = req.body;
+        let usuario;
 
+        if(result.errors.length > 0){
+            return res.render("loginRegister/login", {
+                errors: result.mapped(),
+                msgError: "Hubo un problema con su inicio de sesión",
+                oldData: req.body
+            });
+        }
+
+        if(!dni_mail.includes("@") ){
+            usuario = await Usuario.findOne({ where: { dni: dni_mail } });
+        } else {
+            usuario = await Representante.findOne({ where: { mail: dni_mail } });
+            // if (!usuario)  usuario = await Voluntario.findOne({ where: { mail: dni_mail } });
+        }
+
+        if (!usuario || usuario.password != password) {
+            return res.render("loginRegister/login", {
+                msgError: "Hubo un problema con su inicio de sesión",
+                oldData: req.body
+            });
+        }
+
+
+        req.session.name = usuario.nombre;
         res.redirect("/")
 
-        // res.render("loginRegister/login", {
-        //     info: JSON.stringify(req.body)
-        // });
-    
      },
      logout: (req,res) =>{
         req.session.destroy();
