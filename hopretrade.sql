@@ -24,14 +24,19 @@ DROP TABLE iF EXISTS hopetrade.filial;
 CREATE TABLE hopetrade.filial (
     id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(50) NOT NULL,
-    direccion VARCHAR(100) NOT NULL,
-    descripcion  VARCHAR(255) NOT NULL,
+    direccion VARCHAR(20) NOT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT filial_PK PRIMARY KEY (id)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO hopetrade.filial VALUES 
+(DEFAULT, "Caritas Esperanza", "6 y 55", DEFAULT), (DEFAULT, "Caritas Las Quintas", "12 y 43", DEFAULT),
+(DEFAULT, "Caritas LP", "116 y 66", DEFAULT), (DEFAULT, "Caritas Solidaridad", "26 y 47", DEFAULT),
+(DEFAULT, "Caritas Tolosa", "4 y 526", DEFAULT);
 
 
 
@@ -56,6 +61,10 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 
 
+INSERT INTO hopetrade.usuario VALUES 
+(default, "2013", "walter", "white", "breaking@bad.com", "$2a$10$kHftH0B3y.riYT28g66ZP.vdrN9/EA1eT6KVuohI9JuAxHj1mE1RK", "12345", "2006-05-15", DEFAULT, NULL);
+
+
 
 DROP TABLE IF EXISTS hopetrade.voluntario;
 
@@ -77,6 +86,10 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 
 
+INSERT INTO hopetrade.voluntario VALUES 
+(default, "jorge", "curioso", "george@curious.com", "$2a$10$kHftH0B3y.riYT28g66ZP.vdrN9/EA1eT6KVuohI9JuAxHj1mE1RK", 1, DEFAULT, NULL);
+
+
 
 DROP TABLE IF EXISTS hopetrade.representante;
 
@@ -94,6 +107,10 @@ CREATE TABLE hopetrade.representante (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO hopetrade.representante VALUES 
+(default, "macri", "miau", "macri@gato.com", "$2a$10$kHftH0B3y.riYT28g66ZP.vdrN9/EA1eT6KVuohI9JuAxHj1mE1RK", DEFAULT, NULL);
 
 
 

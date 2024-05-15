@@ -1,6 +1,8 @@
 const { validationResult, matchedData } = require("express-validator")
+const bcrypt = require('bcryptjs');
 
 const Usuario = require('../database/models/Usuario')
+const Voluntario = require("../database/models/Voluntario");
 const Representante = require("../database/models/Representante");
 
 const controlador = {
@@ -20,13 +22,15 @@ const controlador = {
                 oldData: req.body
             });
         }
+
+        const encryptedPassword = bcrypt.hashSync(password, 10);
         try {
             const usuario = await Usuario.create({
                 nombre: nombre, 
                 apellido: apellido,
                 dni: dni,
                 mail: mail,
-                password: password,
+                password: encryptedPassword,
                 telefono: telefono,
                 fecha_nacimiento: fecha
             });
@@ -52,22 +56,27 @@ const controlador = {
             });
         }
 
+        //aca le hace peticiones a la BD
         if(!dni_mail.includes("@") ){
             usuario = await Usuario.findOne({ where: { dni: dni_mail } });
             rol = "normal"
         } else {
-            usuario = await Representante.findOne({ where: { mail: dni_mail } });
-            rol = "representante"
-            // if (!usuario)  usuario = await Voluntario.findOne({ where: { mail: dni_mail } });
+            usuario = await Voluntario.findOne({ where: { mail: dni_mail } });
+            if (!usuario) {
+                usuario = await Representante.findOne({ where: { mail: dni_mail } });
+                rol = "representante";
+            } else rol = "voluntario";
         }
 
-        if (!usuario || usuario.password != password) {
+        if (!usuario || !bcrypt.compareSync(password, usuario.password)) {
             return res.render("loginRegister/login", {
                 msgError: "Hubo un problema con su inicio de sesión",
                 oldData: req.body
             });
         }
+        //definimos usuario para que solo sea un objeto con sus propiedades (era un modelo de sequelize) y agregamos el rol
         usuario = {...usuario.dataValues, rol: rol}
+        //eaca defino que ahora todas las solicitudes van a tener el objeto session que tiene  otro objeto con todos los datos del usuario
         req.session.usuario = usuario;
         res.redirect("/")
 

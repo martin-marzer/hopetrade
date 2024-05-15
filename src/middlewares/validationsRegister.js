@@ -36,8 +36,8 @@ const validationsRegister = [
 
 
     body("telefono").trim()
-    .notEmpty().withMessage("No puede estar vacio").bail(),
-    
+    .notEmpty().withMessage("No puede estar vacio").bail()
+    .isInt().withMessage("Solo numeros"),
 
     body("fecha").trim()
     .notEmpty().withMessage("No puede estar vacio").bail()
