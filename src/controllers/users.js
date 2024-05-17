@@ -1,4 +1,4 @@
-const { validationResult, matchedData } = require("express-validator")
+const { validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 
 const Usuario = require('../database/models/Usuario')
@@ -46,7 +46,7 @@ const controlador = {
     loginProcess: async (req, res) => {
         const result = validationResult(req);
         const {dni_mail, password} = req.body;
-        let usuario,rol;
+        let usuario,rol, pagina = "/";
 
         if(result.errors.length > 0){
             return res.render("loginRegister/login", {
@@ -59,13 +59,15 @@ const controlador = {
         //aca le hace peticiones a la BD
         if(!dni_mail.includes("@") ){
             usuario = await Usuario.findOne({ where: { dni: dni_mail } });
-            rol = "normal"
+            rol = "comun";
         } else {
             usuario = await Voluntario.findOne({ where: { mail: dni_mail } });
             if (!usuario) {
                 usuario = await Representante.findOne({ where: { mail: dni_mail } });
-                rol = "representante";
-            } else rol = "voluntario";
+                rol = "representante"; 
+            } else {
+                rol = "voluntario";
+            }
         }
 
         if (!usuario || !bcrypt.compareSync(password, usuario.password)) {
@@ -78,7 +80,7 @@ const controlador = {
         usuario = {...usuario.dataValues, rol: rol}
         //eaca defino que ahora todas las solicitudes van a tener el objeto session que tiene  otro objeto con todos los datos del usuario
         req.session.usuario = usuario;
-        res.redirect("/")
+        res.redirect(pagina)
 
      },
      logout: (req,res) =>{

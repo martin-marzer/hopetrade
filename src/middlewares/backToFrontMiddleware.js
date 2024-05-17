@@ -1,10 +1,10 @@
-function frontToBackMiddleware (req, res, next) {
+function backToFrontMiddleware (req, res, next) {
     if (req.session.usuario != undefined) {
        res.locals.usuario = req.session.usuario;
     }
     next()
 }
-module.exports = frontToBackMiddleware   
+module.exports = backToFrontMiddleware   
 
 //aca es donde mediante el objeto locals (de ejs) le paso la informacion del usuario, si esta conecatdo o no 
 

@@ -4,7 +4,6 @@ const mainController = require("../controllers/main");
 
 // define the home page route
 router.get('/', mainController.index);
-// router.post('/',(req,res) => {res.send("que")});
 
 
 
